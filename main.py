@@ -36,18 +36,19 @@ async def ask(request: Request):
         action_fn = ACTIONS.get(ai.action_name)
         if action_fn:
             result = action_fn(**(ai.action_args or {}))
+            print(f"Result:{result}")
             return {"final_answer": ai.final_answer, "action_output": result}
-        app.mount("/static", StaticFiles(directory="static"), name="static")
-        html = f"""
-        <html>
-        <body>
-            <h2>Final Answer</h2>
-            <p>{ai.final_answer}</p>
-            <h2>Action</h2>
-            <p>{ai.action_name}</p>
-            <br><a href="/">Back</a>
-        </body>
-        </html>
-        """
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+    html = f"""
+    <html>
+    <body>
+        <h2>Final Answer</h2>
+        <p>{ai.final_answer}</p>
+        <h2>Action</h2>
+        <p>{ai.action_name}</p>
+        <br><a href="/">Back</a>
+    </body>
+    </html>
+    """
 
-        return HTMLResponse(content=html)
+    return HTMLResponse(content=html)
