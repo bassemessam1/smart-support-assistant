@@ -20,10 +20,8 @@ class AIResponse(BaseModel):
     response_type: str = Field(..., description="Type of response: action or final")
     final_answer: str = Field(..., description="Message to show to the user")
     action_name: Optional[str] = Field(None, description="Name of the requested action")
-    action_args: Optional[Dict[str, Any]] = Field(
-        None,
-        description="Arguments for the action. Must be an object."
-    )
+    action_args: Optional[Dict[str, Any]] = Field(None, description="Arguments for the action. Must be an object.")
+
 
     @classmethod
     def json_schema(cls) -> dict:
